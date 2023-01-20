@@ -1,30 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <style>
-     body {
-     background-color: rgb(49, 47, 43);
-}
-
-    </style>
-    <title>kaarsvet.nl</title>
+  <title>Login Page</title>
+  <style>
+    /* Add CSS for a fancy design here */
+    /* CSS for the globe */
+    .globe {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+      position: relative;
+      animation: spin 20s linear infinite;
+    }
+    .globe img {
+      width: 100%;
+    }
+    /* Keyframe animation for the spinning effect */
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-    <p style="font-family:Impact">FREE VETTA KAAS.</p>
-    <p style="font-family:'Courier New'">GEMAAKT DOOR @SCAMBEDRIJF.</p> 
-    <p style="font-size:30px">kaarsvet Marketplace:</p>
-    <p style="font-size:11px">*wij zijn niet verantwoordelijk voor oplichting op deze site*</p> 
-    <a href="default.asp">
-        <img src="https://poetsprins.nl/wp-content/uploads/2021/05/9J0A0174.jpg" alt="ANDRE" style="width:600px;height:600px;">
-      </a> 
-      <figure>
-        <figcaption>music</figcaption>
-        <audio
-            controls
-            src="https://sounds-mp3.com/mp3/0009927.mp3">
-                Your browser does not support the
-                <code>audio</code> element.
-        </audio>
-    </figure>    
+  <form>
+    <label>Username:</label>
+    <input type="text" id="username" required>
+    <br>
+    <label>Password:</label>
+    <input type="password" id="password" required>
+    <br>
+    <input type="button" value="Login" onclick="checkLogin()">
+  </form>
+  <div class="globe">
+    <img src="https://media.istockphoto.com/id/1161533800/nl/vector/earth-globe-met-groene-continenten-moderne-3d-wereld-kaart-concept-wereld-kaart-realistische.jpg?s=170667a&w=0&k=20&c=g6GR5jFMo0cgkoOsorccN_90dixZCnJI_zNDIjbOVdw=" alt="World Globe">
+  </div>
+  <script>
+    function checkLogin() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      
+      if (username === "Gilvano" && password === "123") {
+        window.location.href = "https://onlyfans.com/milan";
+      } else {
+        alert("Incorrect username or password. Please try again.");
+      }
+    }
+    var file = new Blob(["je bent gewoon gay.    // User:Gilvano Pass: 123"], {type: "text/plain"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(file);
+    a.download = "KijkIkWeetniet.txt";
+    a.innerHTML = "Dombo hier neem de inlog";
+    document.body.appendChild(a);
+  </script>
 </body>
 </html>
